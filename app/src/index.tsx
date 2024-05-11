@@ -1,6 +1,7 @@
 import { render } from 'solid-js/web';
+import { Router, Route } from '@solidjs/router';
 
-import { TodoList } from './todo-list';
+import { Login } from './pages/login';
 
 const root = document.getElementById('root');
 
@@ -10,4 +11,11 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
-render(() => <TodoList />, root!);
+render(
+  () => (
+    <Router>
+      <Route path="/login" component={Login} />
+    </Router>
+  ),
+  document.getElementById('root')!,
+)
