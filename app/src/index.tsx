@@ -2,7 +2,7 @@ import { render } from 'solid-js/web';
 import { Router, Route } from '@solidjs/router';
 import "./index.css";
 
-import { Login } from './pages/login';
+import Login from './pages/login';
 
 const root = document.getElementById('root');
 
