@@ -3,6 +3,8 @@ import { Router, Route } from '@solidjs/router';
 import "./index.css";
 
 import Login from './pages/login';
+import Dashboard from './pages/dashboard';
+import Page403 from './pages/403';
 
 const root = document.getElementById('root');
 
@@ -16,6 +18,8 @@ render(
   () => (
     <Router>
       <Route path="/" component={Login} />
+      <Route path="/:userId/dashboard/" component={Dashboard} />
+      <Route path="/403" component={Page403} />
     </Router>
   ),
   document.getElementById('root')!,
