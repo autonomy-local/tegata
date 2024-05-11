@@ -5,6 +5,8 @@ import "./index.css";
 import Login from './pages/login';
 import Dashboard from './pages/dashboard';
 import Page403 from './pages/403';
+import AddAccount from './pages/account/addAccount';
+import AddTenant from './pages/tenant/addTenant';
 
 const root = document.getElementById('root');
 
@@ -20,6 +22,8 @@ render(
       <Route path="/" component={Login} />
       <Route path="/:userId/dashboard/" component={Dashboard} />
       <Route path="/403" component={Page403} />
+      <Route path="/:userId/account/add" component={AddAccount} />
+      <Route path="/:userId/tenant/add" component={AddTenant} />
     </Router>
   ),
   document.getElementById('root')!,
