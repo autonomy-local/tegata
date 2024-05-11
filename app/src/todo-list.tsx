@@ -20,6 +20,7 @@ export const TodoList = () => {
   return (
     <>
       <div>
+        <h1 className="text-3xl font-bold underline">Hello World</h1>
         <input placeholder="new todo here" ref={input} />
         <button
           onClick={() => {
