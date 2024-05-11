@@ -4,7 +4,7 @@ import * as assert from "uvu/assert";
 import { render, fireEvent, waitFor } from '@solidjs/testing-library';
 import { isInDocument, hasStyle } from 'solid-dom-testing';
 
-import { Login } from './login';
+import Login from './login';
 
 const test = suite<ReturnType<typeof render>>('<Login />');
 
@@ -18,22 +18,16 @@ test.before.each((context) => {
 
 test.after.each(({ unmount }) => unmount());
 
-// test target: it will render an username input and a password input
-test('it will render an username input and a password input', ({
-  getByPlaceholderText,
-}) => {
-  assert.ok(isInDocument(getByPlaceholderText('Username')));
-  assert.ok(isInDocument(getByPlaceholderText('******************')));
+test('form render email input', ({ getByLabelText }) => {
+  assert.ok(isInDocument(getByLabelText('Email address')));
 });
 
-// test target: it will render an Sign In button
-test('it will render an Sign In button', ({ getByText }) => {
-  assert.ok(isInDocument(getByText('Sign In')));
+test('form render password input', ({ getByLabelText }) => {
+  assert.ok(isInDocument(getByLabelText('Password')));
 });
 
-// test target: it will render an Forgot Password link
-test('it will render an Forgot Password link', ({ getByText }) => {
-  assert.ok(isInDocument(getByText('Forgot Password?')));
+test('form render sign in button', ({ getByText }) => {
+  assert.ok(isInDocument(getByText('Sign in')));
 });
 
 test.run();

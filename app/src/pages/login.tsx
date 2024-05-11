@@ -1,7 +1,7 @@
 import { createSignal } from 'solid-js';
 import { signIn } from '../service/auth';
 
-export const Login = () => {
+const Login = () => {
   const [email, setEmail] = createSignal('');
   const [password, setPassword] = createSignal('');
 
@@ -68,3 +68,5 @@ export const Login = () => {
     </div>
   );
 }
+
+export default Login;
