@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, UserCredential } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, UserCredential, User } from "firebase/auth";
 import { firebaseApp } from "./firebase";
 
 /* 
@@ -25,6 +25,14 @@ export async function isVerifiedAccount():Promise<boolean> {
       } else {
         resolve(false);
       }
+    });
+  });
+}
+
+export async function getCurrentUser():Promise<User | null> {
+  return new Promise((resolve) => {
+    onAuthStateChanged(auth, (user) => {
+      resolve(user);
     });
   });
 }
