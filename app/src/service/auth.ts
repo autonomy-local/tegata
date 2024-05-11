@@ -1,4 +1,4 @@
-import { getAuth, signInWithEmailAndPassword, signOut, UserCredential } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, UserCredential } from "firebase/auth";
 import { firebaseApp } from "./firebase";
 
 /* 
@@ -14,4 +14,18 @@ export async function signIn(email: string, password: string):Promise<UserCreden
     return  new Error("Email or password is incorrect");
   });
   return userCredential;
+}
+
+// check if user is signed in
+export async function isVerifiedAccount():Promise<boolean> {
+  return new Promise((resolve) => {
+    onAuthStateChanged(auth, (user) => {
+      console.log(user);
+      if (user) {
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    });
+  });
 }
