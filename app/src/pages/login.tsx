@@ -1,5 +1,6 @@
 import { createSignal } from 'solid-js';
 import { signIn } from '../service/auth';
+import { useNavigate } from '@solidjs/router';
 
 const Login = () => {
   const [email, setEmail] = createSignal('');
@@ -30,9 +31,11 @@ const Login = () => {
       window.alert(userCredential.message);
     } else {
       const userId = userCredential.user.uid;
-      history.pushState({}, '', `/${userId}/dashboard/`);
+      const navigate = useNavigate();
+      navigate(`/${userId}/dashboard`);
     }
   }
+
 
   return (
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">

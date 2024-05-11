@@ -1,13 +1,15 @@
 
 import { createEffect } from "solid-js";
 import { isVerifiedAccount } from "../service/auth";
+import { useNavigate } from "@solidjs/router";
 
 const Dashboard = () => {
   createEffect(() => {
     // check if user is signed in
     isVerifiedAccount().then((isVerified) => {
       if (!isVerified) {
-        history.pushState({}, "", "/403");
+        const navigate = useNavigate();
+        navigate('/403');
       }
     });
   })
