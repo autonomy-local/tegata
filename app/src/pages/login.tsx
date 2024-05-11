@@ -5,6 +5,7 @@ import { useNavigate } from '@solidjs/router';
 const Login = () => {
   const [email, setEmail] = createSignal('');
   const [password, setPassword] = createSignal('');
+  const navigate = useNavigate();
 
   const validateEmail = (email: string) => {
     const re = /\S+@\S+\.\S+/;
@@ -31,7 +32,6 @@ const Login = () => {
       window.alert(userCredential.message);
     } else {
       const userId = userCredential.user.uid;
-      const navigate = useNavigate();
       navigate(`/${userId}/dashboard`);
     }
   }
