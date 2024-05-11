@@ -1,5 +1,6 @@
 import { render } from 'solid-js/web';
 import { Router, Route } from '@solidjs/router';
+import "./index.css";
 
 import { Login } from './pages/login';
 
@@ -14,7 +15,7 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 render(
   () => (
     <Router>
-      <Route path="/login" component={Login} />
+      <Route path="/" component={Login} />
     </Router>
   ),
   document.getElementById('root')!,
