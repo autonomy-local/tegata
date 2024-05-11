@@ -20,7 +20,6 @@ export async function signIn(email: string, password: string):Promise<UserCreden
 export async function isVerifiedAccount():Promise<boolean> {
   return new Promise((resolve) => {
     onAuthStateChanged(auth, (user) => {
-      console.log(user);
       if (user) {
         resolve(true);
       } else {
