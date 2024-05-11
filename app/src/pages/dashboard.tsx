@@ -4,15 +4,16 @@ import { isVerifiedAccount } from "../service/auth";
 import { useNavigate } from "@solidjs/router";
 
 const Dashboard = () => {
-  createEffect(() => {
+
+  const navigate = useNavigate();
+
+  createEffect(async () => {
     // check if user is signed in
-    isVerifiedAccount().then((isVerified) => {
-      if (!isVerified) {
-        const navigate = useNavigate();
-        navigate('/403');
-      }
-    });
-  })
+    if (!(await isVerifiedAccount())) {
+      navigate("/403");
+    }
+  });
+
   return (
     // tailwindcss classes
     <div class="bg-gray-100 h-screen">
