@@ -15,10 +15,6 @@ const Dashboard = () => {
     if (!await isVerifiedAccount()) {
       navigate("/403");
     }
-    if (!await getAccountInfo()) {
-      const user = await getCurrentUser();
-      navigate(`/${user?.uid}/account/add`);
-    }
   });
 
   const handleRegisterTenant = async () => {

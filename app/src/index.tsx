@@ -20,10 +20,10 @@ render(
   () => (
     <Router>
       <Route path="/" component={Login} />
-      <Route path="/:userId/dashboard/" component={Dashboard} />
-      <Route path="/403" component={Page403} />
-      <Route path="/:userId/account/add" component={AddAccount} />
-      <Route path="/:userId/tenant/add" component={AddTenant} />
+      <Route path="/dashboard/" component={Dashboard} />
+      <Route path="*403" component={Page403} />
+      <Route path="/account/add" component={AddAccount} />
+      <Route path="/tenant/add" component={AddTenant} />
     </Router>
   ),
   document.getElementById('root')!,
