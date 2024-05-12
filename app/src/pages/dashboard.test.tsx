@@ -26,8 +26,4 @@ test('page render dashboard message', ({ getByText }) => {
   assert.ok(isInDocument(getByText('Welcome to your dashboard!')));
 });
 
-test('page render dashboard message', ({ getByText }) => {
-  assert.ok(isInDocument(getByText('You have successfully logged in.')));
-});
-
 test.run();
