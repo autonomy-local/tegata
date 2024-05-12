@@ -31,7 +31,7 @@ test('form render role select', ({ getByLabelText }) => {
 });
 
 test('form render add account button', ({ getByText }) => {
-  assert.ok(isInDocument(getByText('Add Account')));
+  assert.ok(isInDocument(getByText('Register Account')));
 });
 
 test('form render reset button', ({ getByText }) => {

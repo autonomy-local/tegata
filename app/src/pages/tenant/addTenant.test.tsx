@@ -35,7 +35,7 @@ test('form render members input', ({ getByLabelText }) => {
 });
 
 test('form render add tenant button', ({ getByText }) => {
-  assert.ok(isInDocument(getByText('Add Tenant')));
+  assert.ok(isInDocument(getByText('Register Tenant')));
 });
 
 test('form render reset button', ({ getByText }) => {
