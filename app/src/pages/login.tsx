@@ -1,11 +1,9 @@
 import { createSignal } from 'solid-js';
 import { signIn } from '../service/auth';
-import { useNavigate } from '@solidjs/router';
 
 const Login = () => {
   const [email, setEmail] = createSignal('');
   const [password, setPassword] = createSignal('');
-  const navigate = useNavigate();
 
   const validateEmail = (email: string) => {
     const re = /\S+@\S+\.\S+/;
@@ -31,8 +29,7 @@ const Login = () => {
     if (userCredential instanceof Error) {
       window.alert(userCredential.message);
     } else {
-      const userId = userCredential.user.uid;
-      navigate(`/${userId}/dashboard`);
+      window.location.href = '/dashboard';
     }
   }
 
@@ -66,7 +63,7 @@ const Login = () => {
 
       <p class="mt-10 text-center text-sm text-gray-500">
         Not a member?
-        <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Start a 90 day free trial</a>
+        <a href="/account/add" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Start a 90 day free trial</a>
       </p>
     </div>
   );

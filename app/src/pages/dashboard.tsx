@@ -1,31 +1,10 @@
 
-import { createEffect } from "solid-js";
-import { isVerifiedAccount } from "../service/auth";
-import { useNavigate } from "@solidjs/router";
 import { getCurrentUser } from "../service/auth";
 import { QueryObj, getDocumentsWithQuery } from "../service/firestore";
 import { DocumentData } from "firebase/firestore";
 
 
 const Dashboard = () => {
-
-  const navigate = useNavigate();
-
-  createEffect(async () => {
-    if (!await isVerifiedAccount()) {
-      navigate("/403");
-    }
-    if (!await getAccountInfo()) {
-      const user = await getCurrentUser();
-      navigate(`/${user?.uid}/account/add`);
-    }
-  });
-
-  const handleRegisterTenant = async () => {
-    const user = await getCurrentUser();
-    navigate(`/${user?.uid}/tenant/add`);
-  }
-
   return (
     <div class="bg-gray-100 h-screen">
       <header class="bg-white shadow">
@@ -52,9 +31,9 @@ const Dashboard = () => {
           <div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
             <div class="flex flex-col items-center justify-center h-full">
               <h2 class="text-2xl font-bold text-gray-900">Welcome to Dashboard</h2>
-              <button class="mt-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100" onClick={handleRegisterTenant}>
+              <a href="/tenant/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
                 Register Tenant
-              </button>
+              </a>
             </div>
           </div>
         </div>
