@@ -1,39 +1,36 @@
 import { firebaseApp } from './firebase';
-import { CollectionReference, DocumentData, Firestore,  query, Query, addDoc, collection, collectionGroup, connectFirestoreEmulator, deleteDoc, doc, getDoc, getFirestore, setDoc, updateDoc, getDocs, where } from 'firebase/firestore';
+import { CollectionReference, DocumentData, Firestore,  query, Query, addDoc, collection, collectionGroup, deleteDoc, doc, getDoc, getFirestore, setDoc, updateDoc, getDocs, where, QuerySnapshot } from 'firebase/firestore';
 
-const db = getFirestore(firebaseApp);
+export const firestore: Firestore = getFirestore(firebaseApp);
 
 /*
 firebaseはcollectionとdocumentの概念を持っている
 https://firebase.google.com/docs/reference/js/firestore_
 */
 
-// useEmulatorを使うと、ローカルで動かすことができる
-export function useEmulator(host: string, port: number, options?: {mockUserToken?: string}) {
-  try {
-    connectFirestoreEmulator(db, host, port, options);
-  } catch (e) {
-    // this method is used in the development environment, so it is not necessary to handle the error
-    console.error(e);
-  }
-}
-
-function getCollection(collectionName: string): CollectionReference<DocumentData, DocumentData> {
+function getCollection(db: Firestore, collectionName: string): CollectionReference<DocumentData, DocumentData> {
   return collection(db, collectionName);
 }
 
-function getAllDocuments(collectionId: string):Query<DocumentData, DocumentData> {
-  return collectionGroup(db, collectionId);
- }
-
-export function getAllDocumentsWithCollectionName(collectionName: string):Query<DocumentData, DocumentData> {
-  const collectionRef = getCollection(collectionName);
-  return getAllDocuments(collectionRef.id);
+export async function getAllDocumentsWithCollectionName(db: Firestore, collectionName: string):Promise<DocumentData[] | Error>{
+  const collectionRef = getCollection(db, collectionName);
+  try {
+    const documents: DocumentData[] = [];
+    const querySnapshot = await getDocs(collectionRef);
+    querySnapshot.forEach((doc) => {
+      if (doc.data()) {
+        documents.push(doc.data());
+      }
+    });
+    return documents;
+  } catch (error) {
+    return new Error('Error getting documents: ' + error);
+  }
  }
 
 // 新しいドキュメントを任意のIDで追加する
-export async function addNewDocument(collectionName: string, data: DocumentData):Promise<null | Error> {
-  const collectionRef = getCollection(collectionName);
+export async function addNewDocument(db: Firestore, collectionName: string, data: DocumentData):Promise<null | Error> {
+  const collectionRef = getCollection(db, collectionName);
   return setDoc(doc(collectionRef, data.id), data).then(() => {
     return null;
   }).catch((error) => {
@@ -42,8 +39,8 @@ export async function addNewDocument(collectionName: string, data: DocumentData)
 }
 
 // autoIdを使って新しいドキュメントを追加する
-export async function addNewDocumentWithAutoId(collectionName: string, data: DocumentData):Promise<null | Error> {
-  const collectionRef = getCollection(collectionName);
+export async function addNewDocumentWithAutoId(db: Firestore, collectionName: string, data: DocumentData):Promise<null | Error> {
+  const collectionRef = getCollection(db, collectionName);
   return addDoc(collectionRef, data).then(() => {
     return null;
   }).catch((error) => {
@@ -51,7 +48,7 @@ export async function addNewDocumentWithAutoId(collectionName: string, data: Doc
   });
 }
 
-export async function getDocumentById(collectionName: string, documentId: string):Promise<DocumentData | null> {
+export async function getDocumentById(db: Firestore, collectionName: string, documentId: string):Promise<DocumentData | null> {
   const documentRef = doc(db, collectionName, documentId);
   const documentSnapshot = await getDoc(documentRef);
   if (documentSnapshot.exists()) {
@@ -61,7 +58,7 @@ export async function getDocumentById(collectionName: string, documentId: string
   }
 }
 
-export async function updateDocument(collectionName: string, documentId: string, data: DocumentData):Promise<null | Error> {
+export async function updateDocument(db: Firestore, collectionName: string, documentId: string, data: DocumentData):Promise<null | Error> {
   const documentRef = doc(db, collectionName, documentId);
   return updateDoc(documentRef, data).then(() => {
     return null;
@@ -70,7 +67,7 @@ export async function updateDocument(collectionName: string, documentId: string,
   });
 }
 
-export async function deleteDocument(collectionName: string, documentId: string):Promise<null | Error> {
+export async function deleteDocument(db: Firestore, collectionName: string, documentId: string):Promise<null | Error> {
   const documentRef = doc(db, collectionName, documentId);
   return deleteDoc(documentRef).then(() => {
     return null;
@@ -85,7 +82,7 @@ export type QueryObj = {
   value: unknown,
 }
 
-export async function getDocumentsWithQuery(collectionName: string, queryObj: QueryObj):Promise<DocumentData[] | Error> {
+export async function getDocumentsWithQuery(db: Firestore, collectionName: string, queryObj: QueryObj):Promise<DocumentData[] | Error> {
   const collectionRef = collection(db, collectionName);
   const q = query(collectionRef, where(queryObj.field, queryObj.operator, queryObj.value));
   try {
