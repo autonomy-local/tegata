@@ -1,11 +1,10 @@
 import { test} from "uvu";
 import * as assert from "uvu/assert";
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
 import { initializeTestEnvironment, RulesTestEnvironment } from '@firebase/rules-unit-testing';
 
 import { getAllDocumentsWithCollectionName } from "./firestore";
-import { Firestore } from "firebase/firestore";
+import type { Firestore } from "firebase/firestore";
 
 // setup the test environment with the Firestore emulator
 // before running the tests

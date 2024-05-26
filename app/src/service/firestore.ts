@@ -17,11 +17,9 @@ export async function getAllDocumentsWithCollectionName(db: Firestore, collectio
   try {
     const documents: DocumentData[] = [];
     const querySnapshot = await getDocs(collectionRef);
-    querySnapshot.forEach((doc) => {
-      if (doc.data()) {
-        documents.push(doc.data());
-      }
-    });
+    for (const doc of querySnapshot.docs) {
+      documents.push(doc.data());
+    }
     return documents;
   } catch (error) {
     return new Error('Error getting documents: ' + error);
@@ -88,14 +86,12 @@ export async function getDocumentsWithQuery(db: Firestore, collectionName: strin
   try {
     const querySnapshot = await getDocs(q);
     const documents: DocumentData[] = [];
-    querySnapshot.forEach((doc) => {
-      if (doc.data()) {
-        documents.push(doc.data());
-      }
-    });
+    for (const doc of querySnapshot.docs) {
+      documents.push(doc.data());
+    }
     return documents;
   }
   catch (error) {
-    return new Error('Error getting documents: ' + error);
+    return new Error(`Error getting documents: ${error}`);
   }
 }
