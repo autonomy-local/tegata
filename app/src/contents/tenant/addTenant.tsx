@@ -15,7 +15,10 @@ const AddTenant = () => {
 								<option>🛫Product Info</option>
 								<option>⚙️Settings</option>
 							</select>
-							<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
+							<button
+								type="button"
+								class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded"
+							>
 								Logout
 							</button>
 						</div>

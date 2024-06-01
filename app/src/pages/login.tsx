@@ -66,7 +66,7 @@ const Login = () => {
 						</label>
 						<div class="text-sm">
 							<a
-								href="#"
+								href="/forgot-password"
 								class="font-semibold text-indigo-600 hover:text-indigo-500"
 							>
 								Forgot password?
@@ -100,7 +100,7 @@ const Login = () => {
 			<p class="mt-10 text-center text-sm text-gray-500">
 				Not a member?
 				<a
-					href="/account/add"
+					href="/register"
 					class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
 				>
 					Start a 90 day free trial

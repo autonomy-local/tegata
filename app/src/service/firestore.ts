@@ -1,5 +1,17 @@
 import { firebaseApp } from "./firebase";
-import { getFirestore, collection, getDocs,getDoc, setDoc, doc, addDoc, updateDoc, deleteDoc, query,where } from "firebase/firestore";
+import {
+	getFirestore,
+	collection,
+	getDocs,
+	getDoc,
+	setDoc,
+	doc,
+	addDoc,
+	updateDoc,
+	deleteDoc,
+	query,
+	where,
+} from "firebase/firestore";
 import type {
 	CollectionReference,
 	DocumentData,

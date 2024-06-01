@@ -93,12 +93,8 @@ const AddAccount = () => {
 								<button
 									class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 									type="reset"
-									onClick={() => {
-										const name = document.getElementById("name") as HTMLInputElement;
-										const email = document.getElementById("email") as HTMLInputElement;
-										name.value = "";
-										email.value = "";
-									}}
+									// clear the form
+									onClick={() => document.querySelector("form")?.reset()}
 								>
 									Reset
 								</button>

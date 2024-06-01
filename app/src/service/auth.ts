@@ -1,8 +1,9 @@
-import type {
-	UserCredential,
-	User,
+import type { UserCredential, User } from "firebase/auth";
+import {
+	getAuth,
+	signInWithEmailAndPassword,
+	onAuthStateChanged,
 } from "firebase/auth";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, } from "firebase/auth";
 import { firebaseApp } from "./firebase";
 
 /* 
