@@ -20,7 +20,7 @@ dependencies:
 
 devDependencies:
   '@babel/core':
-    specifier: ^7.23.7
+    specifier: ^7.24.6
     version: 7.24.6
   '@firebase/rules-unit-testing':
     specifier: ^3.0.3
