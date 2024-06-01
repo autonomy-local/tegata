@@ -19,7 +19,7 @@
     "@solidjs/testing-library": "^0.8.7",
     "autoprefixer": "^10.4.19",
     "babel-preset-solid": "^1.8.9",
-    "jsdom": "^23.2.0",
+    "jsdom": "^24.0.0",
     "postcss": "^8.4.38",
     "solid-devtools": "^0.30.0",
     "solid-dom-testing": "^0.0.3",
