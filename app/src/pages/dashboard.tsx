@@ -1,6 +1,7 @@
 import { getCurrentUser } from "../service/auth";
-import { QueryObj, getDocumentsWithQuery } from "../service/firestore";
-import { DocumentData } from "firebase/firestore";
+import { getDocumentsWithQuery, firestore }from "../service/firestore";
+import type { QueryObj } from "../service/firestore";
+import type { DocumentData } from "firebase/firestore";
 
 const Dashboard = () => {
 	return (
@@ -12,21 +13,20 @@ const Dashboard = () => {
 					</h1>
 					<div class="flex items-center justify-end">
 						<div class="ml-4 flex items-center md:ml-6">
-							{/* pulldown menu select */}
 							<select class="block appearance-none bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 								<option>🏘️Tenant Info</option>
 								<option>🪪Account Info</option>
 								<option>🛫Product Info</option>
 								<option>⚙️Settings</option>
 							</select>
-							<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
+							<button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded">
 								Logout
 							</button>
 						</div>
 					</div>
 				</div>
 			</header>
-			<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+			<div class="max-w-7xl mx-auto my-2 py-6 sm:px-6 lg:px-8">
 				<div class="px-4 py-6 sm:px-0">
 					<div class="border-4 border-dashed border-gray-200 rounded-lg h-96">
 						<div class="flex flex-col items-center justify-center h-full">
@@ -35,7 +35,7 @@ const Dashboard = () => {
 							</h2>
 							<a
 								href="/tenant/add"
-								class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded"
+								class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 my-2 rounded"
 							>
 								Register Tenant
 							</a>
@@ -58,7 +58,7 @@ async function getAccountInfo(): Promise<DocumentData | null> {
 		operator: "==",
 		value: uid,
 	};
-	const result = await getDocumentsWithQuery(collectionName, queryObj);
+	const result = await getDocumentsWithQuery(firestore, collectionName, queryObj);
 	if (result instanceof Error) {
 		return null;
 	}

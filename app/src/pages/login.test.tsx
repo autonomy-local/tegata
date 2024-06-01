@@ -10,10 +10,10 @@ const test = suite<ReturnType<typeof render>>("<Login />");
 
 test.before.each((context) => {
 	const returnValue = render(() => <Login />);
-	Object.getOwnPropertyNames(returnValue).forEach((name) => {
+	for (const name of Object.getOwnPropertyNames(returnValue)) {
 		// @ts-expect-error
 		context[name] = returnValue[name];
-	});
+	}
 });
 
 test.after.each(({ unmount }) => unmount());
