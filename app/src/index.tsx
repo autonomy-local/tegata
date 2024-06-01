@@ -5,8 +5,8 @@ import "./index.css";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import Page403 from "./pages/403";
-import AddAccount from "./pages/account/addAccount";
-import AddTenant from "./pages/tenant/addTenant";
+import AddAccount from "./contents/account/addAccount";
+import AddTenant from "./contents/tenant/addTenant";
 import { isVerifiedAccount } from "./service/auth";
 
 const root = document.getElementById("root");
@@ -17,26 +17,32 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 	);
 }
 
-render(
-	() => (
-		<Router>
-			<Route path="/" component={Login} />
-			<Route
-				path="/dashboard/"
-				component={Dashboard}
-				load={async () => await checkAuth()}
-			/>
-			<Route path="*403" component={Page403} />
-			<Route path="/account/add" component={AddAccount} />
-			<Route
-				path="/tenant/add"
-				component={AddTenant}
-				load={async () => await checkAuth()}
-			/>
-		</Router>
-	),
-	document.getElementById("root")!,
-);
+if (root) {
+	render(
+		() => (
+			<Router>
+				<Route path="/" component={Login} />
+				<Route
+					path="/dashboard/"
+					component={Dashboard}
+					load={async () => await checkAuth()}
+				/>
+				<Route
+					path="/dashboard/account/add"
+					component={AddAccount}
+					load={async () => await checkAuth()}
+				/>
+				<Route
+					path="/dashboard/tenant/add"
+					component={AddTenant}
+					load={async () => await checkAuth()}
+				/>
+				<Route path="*403" component={Page403} />
+			</Router>
+		),
+		root,
+	);
+}
 
 async function checkAuth() {
 	if (!(await isVerifiedAccount())) {
