@@ -20,10 +20,10 @@ dependencies:
 
 devDependencies:
   '@babel/core':
-    specifier: ^7.24.6
+    specifier: ^7.23.7
     version: 7.24.6
   '@firebase/rules-unit-testing':
-    specifier: ^3.0.2
+    specifier: ^3.0.3
     version: 3.0.3(firebase@10.12.2)
   '@solidjs/testing-library':
     specifier: ^0.8.7
