@@ -1,19 +1,37 @@
-import { Account } from "../../schema/account";
+import type { Account } from "../../schema/account";
+import type { User } from "../../service/auth";
+import { addNewDocument, firestore } from "../../service/firestore";
+import { getCurrentUser } from "../../service/auth";
+import { createSignal, createEffect } from "solid-js";
+
 const AddAccount = () => {
-	// tailwindcssのクラス名
-	// solidjsではclassではなくclassNameを使う
+	const [user, setUser] = createSignal<User | null>(null);
 
-	// テナントアカウントの追加フォーム
-	// baseAccountObjのプロパティを入力するフォーム
+	createEffect(async () => {
+		const currentUser = await getCurrentUser();
+		if (currentUser) {
+			setUser(currentUser);
+		}
+	});
 
-	// ログインユーザーのアカウント情報から取得する
-	// id uid
-	// email
-	// name
-	// createdAt
-	// updatedAt
-
-	// テナントアカウントの追加フォーム
+	const registerAccount = async () => {
+		const name = document.getElementById("name") as HTMLInputElement;
+		const email = document.getElementById("email") as HTMLInputElement;
+		const role = document.getElementById("role") as HTMLSelectElement;
+		const userId = user()?.uid;
+		const newAccount = {
+			id: userId,
+			name: name.value,
+			email: email.value,
+			role: role.value as Account["role"],
+		};
+		const error = await addNewDocument(firestore, "accounts", newAccount);
+		if (error) {
+			console.error(error);
+		} else {
+			window.location.href = "/dashboard";
+		}
+	};
 	return (
 		<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
 			<div class="px-4 py-6 sm:px-0">
@@ -68,12 +86,19 @@ const AddAccount = () => {
 								<button
 									class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 									type="button"
+									onClick={() => registerAccount()}
 								>
 									Register Account
 								</button>
 								<button
 									class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
 									type="reset"
+									onClick={() => {
+										const name = document.getElementById("name") as HTMLInputElement;
+										const email = document.getElementById("email") as HTMLInputElement;
+										name.value = "";
+										email.value = "";
+									}}
 								>
 									Reset
 								</button>
