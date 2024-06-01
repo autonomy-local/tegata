@@ -1,10 +1,10 @@
 import { test } from "uvu";
 import * as assert from "uvu/assert";
 import fs from "node:fs";
-import {
-	initializeTestEnvironment,
+import type {
 	RulesTestEnvironment,
 } from "@firebase/rules-unit-testing";
+import { initializeTestEnvironment } from "@firebase/rules-unit-testing";
 
 import { getAllDocumentsWithCollectionName } from "./firestore";
 import type { Firestore } from "firebase/firestore";

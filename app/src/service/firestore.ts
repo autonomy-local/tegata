@@ -1,22 +1,9 @@
 import { firebaseApp } from "./firebase";
-import {
+import { getFirestore, collection, getDocs,getDoc, setDoc, doc, addDoc, updateDoc, deleteDoc, query,where } from "firebase/firestore";
+import type {
 	CollectionReference,
 	DocumentData,
 	Firestore,
-	query,
-	Query,
-	addDoc,
-	collection,
-	collectionGroup,
-	deleteDoc,
-	doc,
-	getDoc,
-	getFirestore,
-	setDoc,
-	updateDoc,
-	getDocs,
-	where,
-	QuerySnapshot,
 } from "firebase/firestore";
 
 export const firestore: Firestore = getFirestore(firebaseApp);
@@ -46,7 +33,7 @@ export async function getAllDocumentsWithCollectionName(
 		}
 		return documents;
 	} catch (error) {
-		return new Error("Error getting documents: " + error);
+		return new Error(`Error getting documents: ${error}`);
 	}
 }
 
@@ -62,7 +49,7 @@ export async function addNewDocument(
 			return null;
 		})
 		.catch((error) => {
-			return new Error("Error adding document: " + error);
+			return new Error(`Error adding document: ${error}`);
 		});
 }
 
@@ -78,7 +65,7 @@ export async function addNewDocumentWithAutoId(
 			return null;
 		})
 		.catch((error) => {
-			return new Error("Error adding document: " + error);
+			return new Error(`Error adding document: ${error}`);
 		});
 }
 
@@ -91,9 +78,8 @@ export async function getDocumentById(
 	const documentSnapshot = await getDoc(documentRef);
 	if (documentSnapshot.exists()) {
 		return documentSnapshot.data();
-	} else {
-		return null;
 	}
+	return null;
 }
 
 export async function updateDocument(
@@ -108,7 +94,7 @@ export async function updateDocument(
 			return null;
 		})
 		.catch((error) => {
-			return new Error("Error updating document: " + error);
+			return new Error(`Error updating document: ${error}`);
 		});
 }
 
@@ -123,7 +109,7 @@ export async function deleteDocument(
 			return null;
 		})
 		.catch((error) => {
-			return new Error("Error deleting document: " + error);
+			return new Error(`Error deleting document: ${error}`);
 		});
 }
 
