@@ -1,11 +1,8 @@
-import {
-	getAuth,
-	signInWithEmailAndPassword,
-	signOut,
-	onAuthStateChanged,
+import type {
 	UserCredential,
 	User,
 } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, } from "firebase/auth";
 import { firebaseApp } from "./firebase";
 
 /* 
@@ -14,6 +11,7 @@ import { firebaseApp } from "./firebase";
 */
 
 const auth = getAuth(firebaseApp);
+export type { UserCredential, User };
 
 // Sign in with email and password
 export async function signIn(
