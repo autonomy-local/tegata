@@ -3,6 +3,7 @@ import {
 	getAuth,
 	signInWithEmailAndPassword,
 	onAuthStateChanged,
+	signOut
 } from "firebase/auth";
 import { firebaseApp } from "./firebase";
 
@@ -27,6 +28,11 @@ export async function signIn(
 		return new Error("Email or password is incorrect");
 	});
 	return userCredential;
+}
+
+// Sign out
+export async function signOutUser(): Promise<void> {
+	await signOut(auth);
 }
 
 // check if user is signed in
