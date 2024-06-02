@@ -1,5 +1,5 @@
-import { createSignal, createEffect, Show } from "solid-js";
-import { getCurrentUser } from "../service/auth";
+import { createSignal, createEffect } from "solid-js";
+import { getCurrentUser, signOutUser } from "../service/auth";
 import { getDocumentsWithQuery, firestore } from "../service/firestore";
 import AccountContent from "../contents/account/accountContent";
 import type { QueryObj } from "../service/firestore";
@@ -29,6 +29,10 @@ const Dashboard = () => {
 							<button
 								type="button"
 								class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded"
+								onClick={async () => {
+									await signOutUser();
+									window.location.href = "/";
+								}}
 							>
 								Logout
 							</button>

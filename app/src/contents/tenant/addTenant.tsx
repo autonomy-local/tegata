@@ -1,3 +1,4 @@
+import { signOutUser } from "../../service/auth";
 const AddTenant = () => {
 	return (
 		<div class="bg-gray-100 h-screen">
@@ -18,6 +19,10 @@ const AddTenant = () => {
 							<button
 								type="button"
 								class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded"
+								onClick={async () => {
+									await signOutUser();
+									window.location.href = "/";
+								}}
 							>
 								Logout
 							</button>
