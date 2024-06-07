@@ -4,12 +4,12 @@ import * as assert from "uvu/assert";
 import { render, fireEvent, waitFor } from "@solidjs/testing-library";
 import { isInDocument, hasStyle } from "solid-dom-testing";
 
-import Tenant from "./tenant";
+import TenantPage from "./tenant";
 
 const test = suite<ReturnType<typeof render>>("<Tenant />");
 
 test.before.each((context) => {
-	const returnValue = render(() => <Tenant />);
+	const returnValue = render(() => <TenantPage />);
 	for (const name of Object.getOwnPropertyNames(returnValue)) {
 		// @ts-expect-error
 		context[name] = returnValue[name];
