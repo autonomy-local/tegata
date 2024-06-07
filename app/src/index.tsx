@@ -2,11 +2,14 @@ import { render } from "solid-js/web";
 import { Router, Route } from "@solidjs/router";
 import "./index.css";
 
-import Login from "./pages/login";
-import Dashboard from "./pages/dashboard";
-import Page403 from "./pages/403";
+import Login from "./pages/login/login";
+import Page403 from "./pages/403/403";
 import AddAccount from "./contents/account/addAccount";
 import AddTenant from "./contents/tenant/addTenant";
+import AccountPage from "./pages/account/account";
+import TenantPage from "./pages/tenant/tenant";
+import SettingPage from "./pages/setting/setting";
+import ProductPage from "./pages/product/product";
 import { isVerifiedAccount } from "./service/auth";
 
 const root = document.getElementById("root");
@@ -23,8 +26,23 @@ if (root) {
 			<Router>
 				<Route path="/" component={Login} />
 				<Route
-					path="/dashboard/"
-					component={Dashboard}
+					path="/dashboard/account"
+					component={AccountPage}
+					load={async () => await checkAuth()}
+				/>
+				<Route
+					path="/dashboard/tenant"
+					component={TenantPage}
+					load={async () => await checkAuth()}
+				/>
+				<Route
+					path="/dashboard/product"
+					component={ProductPage}
+					load={async () => await checkAuth()}
+				/>
+				<Route
+					path="/dashboard/setting"
+					component={SettingPage}
 					load={async () => await checkAuth()}
 				/>
 				<Route

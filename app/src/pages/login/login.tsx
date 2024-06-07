@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { signIn } from "../service/auth";
+import { signIn } from "../../service/auth";
 
 const Login = () => {
 	const [email, setEmail] = createSignal("");
@@ -29,7 +29,7 @@ const Login = () => {
 		if (userCredential instanceof Error) {
 			window.alert(userCredential.message);
 		} else {
-			window.location.href = "/dashboard";
+			window.location.href = "/dashboard/account";
 		}
 	};
 
