@@ -45,13 +45,7 @@ async function getAccountInfo(): Promise<Account | null> {
 		collectionName,
 		queryObj,
 	);
-	if (result instanceof Error) {
-		return null;
-	}
-	if (result.length === 0) {
-		return null;
-	}
-	if (result.length > 1) {
+	if (result instanceof Error || result.length !== 1) {
 		return null;
 	}
 	return result[0] as Account;
