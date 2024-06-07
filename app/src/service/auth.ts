@@ -3,7 +3,7 @@ import {
 	getAuth,
 	signInWithEmailAndPassword,
 	onAuthStateChanged,
-	signOut
+	signOut,
 } from "firebase/auth";
 import { firebaseApp } from "./firebase";
 
