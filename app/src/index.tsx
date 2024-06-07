@@ -9,6 +9,7 @@ import AddTenant from "./contents/tenant/addTenant";
 import AccountPage from "./pages/account/account";
 import TenantPage from "./pages/tenant/tenant";
 import SettingPage from "./pages/setting/setting";
+import ProductPage from "./pages/product/product";
 import { isVerifiedAccount } from "./service/auth";
 
 const root = document.getElementById("root");
@@ -36,7 +37,7 @@ if (root) {
 				/>
 				<Route
 					path="/dashboard/product"
-					component={SettingPage}
+					component={ProductPage}
 					load={async () => await checkAuth()}
 				/>
 				<Route
