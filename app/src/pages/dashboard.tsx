@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from "solid-js";
+import { createSignal, createEffect, Show } from "solid-js";
 import { getCurrentUser, signOutUser } from "../service/auth";
 import { getDocumentsWithQuery, firestore } from "../service/firestore";
 import AccountContent from "../contents/account/accountContent";
@@ -41,7 +41,14 @@ const Dashboard = () => {
 				</div>
 			</header>
 			<div class="max-w-7xl mx-auto my-2 py-6 sm:px-6 lg:px-8">
+				<Show when={accountInfo() === null}>
+					<div class="flex justify-center items-center">
+						<div class="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900" />
+					</div>
+				</Show>
+				<Show when={accountInfo() !== null}>
 				{AccountContent(accountInfo() !== null, accountInfo())}
+				</Show>
 			</div>
 		</div>
 	);
