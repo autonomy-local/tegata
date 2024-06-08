@@ -1,9 +1,11 @@
 import { createSignal } from "solid-js";
 import { signIn } from "../../service/auth";
+import { performanceTrace } from "../../tools/performaceMonitoring";
 
 const Login = () => {
 	const [email, setEmail] = createSignal("");
 	const [password, setPassword] = createSignal("");
+	const loginPerformanceTrace = performanceTrace("loginPerformanceTrace");
 
 	const validateEmail = (email: string) => {
 		const re = /\S+@\S+\.\S+/;
@@ -25,12 +27,14 @@ const Login = () => {
 	};
 
 	const handleLogin = async () => {
+		loginPerformanceTrace.start();
 		const userCredential = await signIn(email(), password());
 		if (userCredential instanceof Error) {
 			window.alert(userCredential.message);
 		} else {
 			window.location.href = "/dashboard/account";
 		}
+		loginPerformanceTrace.stop();
 	};
 
 	return (
