@@ -11,11 +11,9 @@ import TenantPage from "./pages/tenant/tenant";
 import SettingPage from "./pages/setting/setting";
 import ProductPage from "./pages/product/product";
 import { isVerifiedAccount } from "./service/auth";
-import { performanceTrace } from "./tools/performaceMonitoring";
 
 
 const root = document.getElementById("root");
-const rootPerformanceTrace = performanceTrace("performanceTrace");
 
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 	throw new Error(
@@ -24,7 +22,6 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 }
 
 if (root) {
-	rootPerformanceTrace.start();
 	render(
 		() => (
 			<Router>
@@ -64,7 +61,6 @@ if (root) {
 		),
 		root,
 	);
-	rootPerformanceTrace.stop();
 }
 
 async function checkAuth() {
