@@ -17,7 +17,7 @@ const lawObj = z.object({
 	id: z.string(),
 	name: z.string(),
 	createdAt: z.date(),
-	updateAt: z.date(),
+	updatedAt: z.date(),
 });
 
 // 施策
@@ -26,8 +26,8 @@ const policyObj = z.object({
 	name: z.string(),
 	branch: branchObj,
 	law: lawObj,
-  createdAt: z.date(),
-	updateAt: z.date(),
+        createdAt: z.date(),
+	updatedAt: z.date(),
 });
 
 export type Policy = z.infer<typeof policyObj>;
@@ -42,8 +42,8 @@ sample data
     name:"地域振興課",
     govCode: 342131,
     law: "廿日市市まちづくり交付金交付要綱"
-    createAt: "2024-04-01T00:00:00"
-    updateAt: "2024-04-01T00:00:00"
+    createdAt: "2024-04-01T00:00:00"
+    updatedAt: "2024-04-01T00:00:00"
   }
 }
 */
