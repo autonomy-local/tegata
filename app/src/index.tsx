@@ -12,7 +12,6 @@ import SettingPage from "./pages/setting/setting";
 import ProductPage from "./pages/product/product";
 import { isVerifiedAccount } from "./service/auth";
 
-
 const root = document.getElementById("root");
 
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {

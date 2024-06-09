@@ -26,7 +26,7 @@ const policyObj = z.object({
 	name: z.string(),
 	branch: branchObj,
 	law: lawObj,
-        createdAt: z.date(),
+	createdAt: z.date(),
 	updatedAt: z.date(),
 });
 
