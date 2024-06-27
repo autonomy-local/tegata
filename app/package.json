@@ -14,7 +14,7 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.23.7",
-    "@biomejs/biome": "1.8.1",
+    "@biomejs/biome": "1.8.3",
     "@firebase/rules-unit-testing": "^3.0.2",
     "@solidjs/testing-library": "^0.8.7",
     "autoprefixer": "^10.4.19",
